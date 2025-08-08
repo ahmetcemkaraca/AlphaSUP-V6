@@ -1,0 +1,12 @@
+{
+  "name": "AlphaSUP",
+  "short_name": "AlphaSUP",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f2fbfb",
+  "theme_color": "#0ea5a3",
+  "lang": "tr",
+  "icons": [
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
