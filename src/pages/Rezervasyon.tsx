@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import { createReservation } from "@/lib/api";
+import { auth } from "@/lib/firebase";
 import { SEO } from "@/components/seo/SEO";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -76,15 +78,30 @@ export default function Rezervasyon() {
   const canNext4 = termsAccepted;
   const canPay = name && email && phone;
 
-  const goPay = () => {
+  const goPay = async () => {
     if (!canPay) {
       toast({ title: "Eksik bilgi", description: "Lütfen müşteri bilgilerini doldurun.", variant: "destructive" });
       return;
     }
-    toast({
-      title: "Ödeme başlatılacak",
-      description: "Stripe ile güvenli ödeme için Supabase entegrasyonu sonrası buradan yönlendirme yapılacak.",
-    });
+    try {
+      const id = await createReservation({
+        serviceId: service,
+        dateISO: date ? date.toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10),
+        time: time || "",
+        people,
+        boardType,
+        extras: selectedExtras,
+        totalTRY: total,
+        customer: { name, email, phone },
+        coupon: coupon || undefined,
+        termsAccepted,
+        userUid: auth.currentUser?.uid ?? null,
+      });
+      toast({ title: "Rezervasyon oluşturuldu", description: `ID: ${id}` });
+      setStep(6);
+    } catch (err: any) {
+      toast({ title: "Rezervasyon başarısız", description: err?.message || String(err), variant: "destructive" });
+    }
   };
 
   return (

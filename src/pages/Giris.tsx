@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { useMemo, useState } from "react";
+import { emailPasswordSignIn } from "@/lib/api";
 
 const SERVICES = [
   { id: "hourly", name: "Saatlik Kiralama" },
@@ -16,12 +17,15 @@ export default function Giris() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Giriş akışı yakında",
-      description: "Supabase bağlandıktan sonra e‑posta/şifre girişi etkinleşecektir.",
-    });
+    try {
+      await emailPasswordSignIn(email, password);
+      toast({ title: "Giriş başarılı" });
+      window.history.length > 1 ? window.history.back() : (window.location.href = "/");
+    } catch (err: any) {
+      toast({ title: "Giriş başarısız", description: err?.message || String(err), variant: "destructive" });
+    }
   };
 
   return (
@@ -42,7 +46,7 @@ export default function Giris() {
             <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="mt-2" />
           </div>
           <Button type="submit" variant="hero" className="w-full">Giriş Yap</Button>
-          <p className="text-xs text-muted-foreground">Supabase entegrasyonu ile kimlik doğrulama aktif olacaktır.</p>
+          <p className="text-xs text-muted-foreground">Firebase Auth ile e‑posta/şifre girişi aktiftir.</p>
           <div className="mt-4 text-center">
             <a className="story-link" href="/rezervasyon">Üyeliksiz devam et</a>
           </div>
