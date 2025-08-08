@@ -13,7 +13,7 @@ const navItems = [
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-40 w-full border-b bg-gradient-to-r from-primary/20 via-primary/10 to-secondary/20 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-md overflow-hidden">
@@ -34,9 +34,6 @@ export default function SiteHeader() {
               {item.label}
             </NavLink>
           ))}
-          <NavLink to="/admin" className="text-sm text-muted-foreground hover:text-foreground">
-            Yönetici
-          </NavLink>
           <Button asChild variant="hero" size="sm">
             <Link to="/rezervasyon">Hemen Rezervasyon</Link>
           </Button>
@@ -58,9 +55,6 @@ export default function SiteHeader() {
                 {item.label}
               </NavLink>
             ))}
-            <NavLink to="/admin" onClick={() => setOpen(false)} className="text-sm">
-              Yönetici
-            </NavLink>
             <Button asChild variant="hero">
               <Link to="/rezervasyon">Hemen Rezervasyon</Link>
             </Button>

@@ -10,6 +10,7 @@ import Hizmetler from "./pages/Hizmetler";
 import Rezervasyon from "./pages/Rezervasyon";
 import SSS from "./pages/SSS";
 import Admin from "./pages/Admin";
+import Giris from "./pages/Giris";
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
 
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/rezervasyon" element={<Rezervasyon />} />
             <Route path="/sss" element={<SSS />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/giris" element={<Giris />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
