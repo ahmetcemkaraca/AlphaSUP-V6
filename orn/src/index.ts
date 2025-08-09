@@ -24,6 +24,7 @@ import paymentRoutes from './routes/payment';
 import servicesRoutes from './routes/services';
 import additionalServicesRoutes from './routes/additionalServices';
 import bookingsRoutes from './routes/bookings';
+import availabilityRoutes from './routes/availability';
 // const smsRoutes = require('./routes/sms').default;
 
 // Create Express app
@@ -112,6 +113,7 @@ app.use('/api/additional-services', additionalServicesRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/v1/admin/services', adminServicesRoutes);
 app.use('/api/v1/bookings', bookingsRoutes);
+app.use('/api/availability', availabilityRoutes);
 // app.use('/api/sms', smsRoutes);
 // Root endpoint for Cloud Run health checks (GET and HEAD)
 app.get('/', (_req, res) => {

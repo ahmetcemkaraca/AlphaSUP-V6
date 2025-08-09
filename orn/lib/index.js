@@ -27,6 +27,7 @@ const payment_1 = __importDefault(require("./routes/payment"));
 const services_1 = __importDefault(require("./routes/services"));
 const additionalServices_1 = __importDefault(require("./routes/additionalServices"));
 const bookings_1 = __importDefault(require("./routes/bookings"));
+const availability_1 = __importDefault(require("./routes/availability"));
 // const smsRoutes = require('./routes/sms').default;
 // Create Express app
 const app = (0, express_1.default)();
@@ -98,6 +99,7 @@ app.use('/api/additional-services', additionalServices_1.default);
 app.use('/api/payments', payment_1.default);
 app.use('/api/v1/admin/services', adminServices_1.default);
 app.use('/api/v1/bookings', bookings_1.default);
+app.use('/api/availability', availability_1.default);
 // app.use('/api/sms', smsRoutes);
 // Root endpoint for Cloud Run health checks (GET and HEAD)
 app.get('/', (_req, res) => {
